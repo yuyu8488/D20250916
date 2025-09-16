@@ -1,45 +1,34 @@
 #include <iostream>
 #include <Windows.h>
 #include <conio.h>
+#include<stdlib.h> //rand(), srand()
+#include<time.h> //time()
 
 using namespace std;
-
 
 // entry point
 int main()
 {
-    int Temp = 0;
+    // [][][][] [][][][] [][][][] ... [][][][]    
+    int Map[10][10] = {
+        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+        { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+        { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+        { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+        { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+        { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+        { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+        { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+        { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    };
     
-    // 의도가 분명하게 작성
-    Temp = (10 + 10);
-    Temp = Temp - (10 * 10) / 10 % 10;
-       
-    int DefaultMalrangCowCount = 30;
-    int TodayEatCount = 1;
-    int CurrentMalrangCowCount = DefaultMalrangCowCount - TodayEatCount;
-
-    //cout << "Default MalrangCow  Count: " << DefaultMalrangCowCount << endl;
-    //cout << "Today Eat Count: " << TodayEatCount << endl;
-    //cout << "Current MalrangCow Count: " << CurrentMalrangCowCount;
-    
-    // 문자를 숫자로 인식.
-    char C = 'A';
-    //char  = 65;
-    // >> A;
-    int Gold = 1;
-        
-    //cout << C << endl << endl; 
-
-    // Input -> Process -> Render
-    int PlayerX = 0;
-    int PlayerY = 0;
-    bool bIsRunning = true;
-
-    while (bIsRunning)
+    int PlayerX = 1;
+    int PlayerY = 1;
+    char PlayerShape = 'P';
+    while (true)
     {
         int KeyCode = _getch();
- 
-
         if (KeyCode == 'w')
         {
             PlayerY--;
@@ -56,22 +45,34 @@ int main()
         {
             PlayerX++;
         }
-        else if (KeyCode == 'q')
-        {
-            bIsRunning = false;
-        }
 
+        int X = 0;
+        int Y = 0;
+            
         system("cls");
 
-        COORD Cur;
-        Cur.X = PlayerX;
-        Cur.Y = PlayerY;
-        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Cur);
-
-        std::cout << "P" << endl;
+        for (Y = 0; Y < 10; Y++)
+        {
+            for (X = 0; X < 10; X++)
+            {
+                if (PlayerX == X && PlayerY == Y)
+                {
+                    cout << PlayerShape;
+                }
+                else if (Map[Y][X] == 0)
+                {
+                    cout << ' ';
+                }
+                else if (Map[Y][X] == 1)
+                {
+                    cout << '*';
+                }
+            }
+            cout << "\n";
+        }
     }
+    
 
-  
+
     return 0;
 }
-
